@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FloodRoute Alert helps communities report flood hazards and access road condition information.">
+  <title>FloodRoute Alert | Safer Routes, Stronger Communities</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#home"><span class="brand-icon">F</span> FloodRoute<span class="brand-accent">Alert</span></a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#map-section">Live Map</a>
+      <a href="#report-section">Report a Road</a>
+      <a href="#safety">Safety Tips</a>
+    </nav>
+    <a class="nav-button" href="#report-section">Report Hazard <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="status-dot"></span> COMMUNITY FLOOD AWARENESS</div>
+        <h1>Find safer routes.<br><span>Protect every journey.</span></h1>
+        <p>FloodRoute Alert helps communities share road hazard reports and view reported flood conditions to make better-informed travel decisions during emergencies.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#map-section">Explore Road Map <span>→</span></a>
+          <a class="secondary-button" href="#report-section">＋ Report a Hazard</a>
+        </div>
+        <div class="trust-note"><span>✓</span> Community-powered reporting <span>•</span> Safety-first information</div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-orb orb-one"></div>
+        <div class="visual-orb orb-two"></div>
+        <div class="route-card">
+          <div class="route-card-top"><span class="live-label"><span class="status-dot"></span> DEMO OVERVIEW</span><span>⌖</span></div>
+          <div class="route-illustration">
+            <div class="route-line"></div>
+            <div class="map-road road-one"></div>
+            <div class="map-road road-two"></div>
+            <div class="map-road road-three"></div>
+            <div class="map-pin pin-one">!</div>
+            <div class="map-pin pin-two">!</div>
+            <div class="map-pin pin-three">✓</div>
+          </div>
+          <div class="route-card-bottom"><div><strong>Road awareness</strong><span>Check reports before travelling</span></div><span class="route-arrow">↗</span></div>
+        </div>
+        <div class="floating-card"><span class="floating-icon">⌖</span><div><strong>Stay informed</strong><span>Check road reports</span></div></div>
+      </div>
+    </section>
+
+    <section class="notice-bar">
+      <span class="notice-icon">!</span>
+      <div><strong>Important safety notice</strong><p>Do not enter flooded roads. This prototype does not provide verified real-time flood data or guarantee safe routes.</p></div>
+    </section>
+
+    <section class="section" id="map-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">ROAD CONDITION EXPLORER</span><h2>Explore the road map</h2><p>View sample hazard markers and explore reported locations.</p></div>
+        <span class="demo-badge">DEMO DATA</span>
+      </div>
+      <div class="map-layout">
+        <div class="map-panel"><div id="map"></div><div class="map-caption"><span class="status-dot"></span> Interactive map · Sample markers only</div></div>
+        <aside class="map-sidebar">
+          <h3>Map legend</h3>
+          <div class="legend-item"><span class="legend-marker red-marker">!</span><div><strong>Reported hazard</strong><span>Needs careful verification</span></div></div>
+          <div class="legend-item"><span class="legend-marker amber-marker">?</span><div><strong>Unverified report</strong><span>Not confirmed by authorities</span></div></div>
+          <div class="legend-item"><span class="legend-marker green-marker">i</span><div><strong>Information point</strong><span>Not a safety certification</span></div></div>
+          <div class="sidebar-note"><strong>Before travelling</strong><p>Check official local advisories and emergency instructions. Map markers in this demo do not represent verified road conditions.</p></div>
+          <button class="outline-button" id="reset-map" type="button">Reset map view ↗</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section report-section" id="report-section">
+      <div class="section-heading"><div><span class="eyebrow">COMMUNITY PARTICIPATION</span><h2>Report a road hazard</h2><p>Share a road condition observation to demonstrate community reporting.</p></div></div>
+      <div class="report-layout">
+        <div class="report-intro"><div class="report-icon">⌖</div><h3>Your report can help inform others.</h3><p>Submit the location and details of a suspected flooded or blocked road. Reports from this prototype are stored only in your browser and are not automatically sent to emergency services.</p><div class="report-tip">⚠ Never put yourself at risk to collect information. Do not approach floodwater.</div></div>
+        <form id="report-form" class="report-form">
+          <label for="road-name">Road or location name</label>
+          <input id="road-name" name="roadName" type="text" placeholder="e.g. Main Road, Kanpur" required maxlength="100">
+          <label for="hazard-type">Type of hazard</label>
+          <select id="hazard-type" name="hazardType" required><option value="">Select hazard type</option><option>Flooded road</option><option>Road blockage</option><option>Waterlogging</option><option>Damaged road</option><option>Other hazard</option></select>
+          <label for="severity">Observed severity</label>
+          <select id="severity" name="severity" required><option value="">Select severity</option><option>Low - minor visible issue</option><option>Moderate - travel disruption</option><option>High - possible danger</option><option>Unknown - needs assessment</option></select>
+          <label for="report-details">Additional details</label>
+          <textarea id="report-details" name="details" placeholder="Describe what you observed. Do not enter flooded roads." rows="3" maxlength="500"></textarea>
+          <button class="primary-button submit-button" type="submit">Submit demo report <span>→</span></button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="reports-heading"><h3>Recent community reports</h3><span id="report-count">0 reports</span></div>
+      <div id="reports-list" class="reports-list"><p class="empty-state">No reports yet. Submit a demo report to see it here.</p></div>
+    </section>
+
+    <section class="section safety-section" id="safety">
+      <div class="section-heading"><div><span class="eyebrow">BE PREPARED</span><h2>Flood safety essentials</h2><p>Simple precautions can help reduce risk during flooding.</p></div></div>
+      <div class="safety-grid">
+        <article class="safety-card"><span>01</span><h3>Avoid floodwater</h3><p>Never walk or drive through flooded roads. Water depth and road damage can be difficult to judge.</p></article>
+        <article class="safety-card"><span>02</span><h3>Follow official alerts</h3><p>Check local authorities and disaster management advisories for verified emergency information.</p></article>
+        <article class="safety-card"><span>03</span><h3>Plan ahead</h3><p>Keep emergency contacts, essential medicines and important documents accessible.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-icon">F</span> FloodRoute<span class="brand-accent">Alert</span></a><p>A community-focused flood awareness prototype.</p><span>Built for safer, better-informed decisions.</span><p class="footer-disclaimer">Demo only · Reports are not monitored by emergency services.</p></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
